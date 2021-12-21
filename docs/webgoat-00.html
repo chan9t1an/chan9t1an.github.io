@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+    从 0 开始的 WebGoat 学习 (0) - chan9t1an 的安全学习
+    
+    </title>
+    
+
+    
+    
+    <link href="atom.xml" rel="alternate" title="chan9t1an 的安全学习" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/style.min.css">
+    <link rel="stylesheet" href="asset/css/doc.css">
+    <script src="asset/app.js"></script>
+</head>
+  <body>
+    <section class="hero">
+      <div class="hero-head">
+          <nav class="navbar" role="navigation" aria-label="main navigation">
+              <div class="container">
+              <div class="navbar-brand">
+                
+                <a target="self" class="navbar-item " href="index.html">Home</a>
+                
+                <a target="_self" class="navbar-item " href="archives.html">Archives</a>
+                
+
+                <a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarSNSRssButtons">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </a>
+              </div>
+            
+              <div id="navbarSNSRssButtons" class="navbar-menu">
+                <div class="navbar-start">
+                  
+                </div>
+            
+                <div class="navbar-end">
+                  <div class="navbar-item">
+                    <!--buttons start-->
+                    <div class="buttons">
+                      
+                        
+                        
+                        
+                        
+                      
+                      <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+                          </span>
+                      </a>
+                    </div>
+                    <!--buttons end-->
+
+                  </div>
+                </div>
+                </div>
+              </div>
+            </nav>
+      </div>
+
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            从 0 开始的 WebGoat 学习 (0)   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2021/12/16 18:10 下午</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='WebGoat.html'>WebGoat</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_security.html'>#security</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_ssl.html'>#ssl</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_encode.html'>#encode</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_hash.html'>#hash</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_encryption.html'>#encryption</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_sign.html'>#sign</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_burpsuite.html'>#burpsuite</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_rsa.html'>#rsa</a>
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <ul>
+<li><a href="#%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%9A%84-webgoat%E5%AD%A6%E4%B9%A0-0">从 0 开始的 WebGoat 学习 (0)</a>
+<ul>
+<li><a href="#0x00%E7%8E%AF%E5%A2%83">0x00 环境</a></li>
+<li><a href="#0x01-http-basics">0x01 HTTP Basics</a></li>
+<li><a href="#0x02-http-proxies">0x02 HTTP Proxies</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8burpsuite">安装并使用 BurpSuite</a></li>
+<li><a href="#intercept-and-modify-a-request">Intercept and modify a request</a></li>
+</ul>
+</li>
+<li><a href="#0x03-developer-tools">0x03 Developer Tools</a></li>
+<li><a href="#0x04-cia-triad">0x04 CIA Triad</a></li>
+<li><a href="#0x05-crypto-basic">0x05 Crypto Basic</a>
+<ul>
+<li><a href="#encoding%E7%BC%96%E7%A0%81">Encoding 编码</a>
+<ul>
+<li><a href="#lesson-2%E9%A2%98%E7%9B%AE">Lesson 2 题目</a></li>
+<li><a href="#lesson-3%E9%A2%98%E7%9B%AE">Lesson 3 题目</a></li>
+</ul>
+</li>
+<li><a href="#%E5%93%88%E5%B8%8C%E6%91%98%E8%A6%81hashing">哈希/摘要 Hashing</a>
+<ul>
+<li><a href="#%E5%8A%A0%E7%9B%90">加盐</a></li>
+<li><a href="#lesson-4%E9%A2%98%E7%9B%AE">Lesson 4 题目</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8A%A0%E5%AF%86encryption">加密 Encryption</a></li>
+<li><a href="#%E7%AD%BE%E5%90%8Dsigning">签名 Signing</a>
+<ul>
+<li><a href="#lesson-6%E9%A2%98%E7%9B%AE">Lesson 6 题目</a></li>
+<li><a href="#rsa%E7%AE%97%E6%B3%95">RSA 算法</a></li>
+<li><a href="#%E5%9B%9E%E5%88%B0lesson-6%E9%A2%98%E7%9B%AE">回到 Lesson 6 题目</a></li>
+</ul>
+</li>
+<li><a href="#keystores%E5%AF%86%E9%92%A5%E5%BA%93">Keystores 密钥库</a></li>
+<li><a href="#security-defaults">Security defaults</a>
+<ul>
+<li><a href="#lesson-8%E9%A2%98%E7%9B%AE">Lesson 8 题目</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0xff%E5%BC%95%E7%94%A8">0xFF 引用</a></li>
+</ul>
+</li>
+</ul>
+<h2><a id="0x00%E7%8E%AF%E5%A2%83%E2%80%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x00 环境 </h2>
+<p>先把环境跑起来</p>
+<ol>
+<li>WebGoat 的地址: <a href="https://github.com/WebGoat/WebGoat/">https://github.com/WebGoat/WebGoat/</a></li>
+<li>目前我使用的版本是 v8.2.2</li>
+<li>按照官方教程, 直接 docker 启动
+<ul>
+<li><code>docker run -it -p 127.0.0.1:80:8888 -p 127.0.0.1:8080:8080 -p 127.0.0.1:9090:9090 -e TZ=Asia/Shanghai webgoat/goatandwolf:v8.2.2</code></li>
+</ul>
+</li>
+<li><code>http://127.0.0.1:8080/WebGoat</code> 访问, 并注册账号, 进入页面</li>
+</ol>
+<p><img src="media/16396494348330/16396514020685.jpg" alt="" /></p>
+<h2><a id="0x01-http-basics" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x01 HTTP Basics</h2>
+<p><a href="http://127.0.0.1:8080/WebGoat/start.mvc#lesson/HttpBasics.lesson">http://127.0.0.1:8080/WebGoat/start.mvc#lesson/HttpBasics.lesson</a></p>
+<p>F12 开发者模式查看 HTTP 请求并输入答案</p>
+<h2><a id="0x02-http-proxies" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x02 HTTP Proxies</h2>
+<p><a href="http://127.0.0.1:8080/WebGoat/start.mvc#lesson/HttpProxies.lesson">http://127.0.0.1:8080/WebGoat/start.mvc#lesson/HttpProxies.lesson</a></p>
+<ul>
+<li>章节中提到了名为 <code>zed attack proxy</code> 的工具, 不过我不打算用</li>
+<li>据之前的了解, 渗透测试中更常用的应该是 <code>BurpSuite</code></li>
+</ul>
+<h3><a id="%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8burpsuite" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装并使用 BurpSuite</h3>
+<p>社区版下载安装 <a href="https://portswigger.net/burp/communitydownload">https://portswigger.net/burp/communitydownload</a></p>
+<p>或者 <code>brew install --cask burp-suite</code></p>
+<p>为了方便, 先使用 BurpSuite 的内置 Chrominium 浏览器</p>
+<p>找到了一个 BurpSuite 的说明书: <a href="https://t0data.gitbooks.io/burpsuite/content/">https://t0data.gitbooks.io/burpsuite/content/</a></p>
+<h3><a id="intercept-and-modify-a-request" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Intercept and modify a request</h3>
+<p><img src="media/16396494348330/16397125509756.jpg" alt="" /></p>
+<h2><a id="0x03-developer-tools" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x03 Developer Tools</h2>
+<p>已知的知识, 跳过</p>
+<h2><a id="0x04-cia-triad" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x04 CIA Triad</h2>
+<ul>
+<li>保密性 (Confidentiality)
+<ul>
+<li>未经授权的人不应该获取敏感信息</li>
+</ul>
+</li>
+<li>完整性 (Integrity)
+<ul>
+<li>一致, 准确, 可信</li>
+</ul>
+</li>
+<li>可用性 (Availability)</li>
+</ul>
+<h2><a id="0x05-crypto-basic" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x05 Crypto Basic</h2>
+<h3><a id="encoding%E7%BC%96%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Encoding 编码</h3>
+<p>不属于密码学范畴</p>
+<p>不是加密, 仅仅是编码方式的转换</p>
+<ul>
+<li>Base64</li>
+<li>URL encoding
+<ul>
+<li>URL 中不允许空格等其他字符, 因此换个表示方式</li>
+</ul>
+</li>
+<li>HTML encoding
+<ul>
+<li>为了保证某些字符是显示在 HTML 页面中, 而不是被当成 HTML 的一部分被解释执行</li>
+</ul>
+</li>
+<li>UUEncode
+<ul>
+<li>Unix-2-Unix</li>
+<li>邮件附件</li>
+<li><a href="https://cryptowikis.com/EncodeDecode/UUencode/">https://cryptowikis.com/EncodeDecode/UUencode/</a></li>
+</ul>
+</li>
+<li>XOR encoding
+<ul>
+<li>单纯用 key 来做 xor, 可以猜测 key 的长度之后进行暴力破解</li>
+<li>IBM WebSphere Application Server 默认密码存储方式</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>软件设计上不要把 encode/decode 用在一些奇怪的地方, 给人一种加过密的错觉<br />
+还不如直接用明文, 至少人看到之后的第一印象是 <em>不安全</em>, 这样就会去尝试改进它<br />
+<em>人的认知能力有限</em> 可能才是安全问题最大的隐患</p>
+</blockquote>
+<h4><a id="lesson-2%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 2 题目</h4>
+<p>直接 Base64 Decode 就行了</p>
+<h4><a id="lesson-3%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 3 题目</h4>
+<p>直接用在线工具破解</p>
+<p>或者观察破解工具原码, 发现是与固定 key '_' xor 后, Base64 encode 的结果, 把这个过程逆向一下就得到结果了</p>
+<h3><a id="%E5%93%88%E5%B8%8C%E6%91%98%E8%A6%81hashing" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>哈希/摘要 Hashing</h3>
+<p>用于校验信息是否被改变</p>
+<p>但不应该用于保存密码</p>
+<ul>
+<li>彩虹表
+<ul>
+<li>将密码与 hash 结果的对应关系保存在一个大的 hash map 中</li>
+</ul>
+</li>
+<li>构造碰撞
+<ul>
+<li>payload 改变, 但 hash 结果不bmwq</li>
+<li>MD5, SHA-1</li>
+</ul>
+</li>
+</ul>
+<h4><a id="%E5%8A%A0%E7%9B%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>加盐</h4>
+<p>密码应该被加盐后 hash 存储</p>
+<p>关于密码存储的 cheat sheet:<br />
+<a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html</a></p>
+<h4><a id="lesson-4%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 4 题目</h4>
+<p>先识别 hash 类型 <a href="https://www.kali.org/tools/hash-identifier/">https://www.kali.org/tools/hash-identifier/</a><br />
+再彩虹表破解 <a href="https://www.kali.org/tools/hashcat/">https://www.kali.org/tools/hashcat/</a></p>
+<p><img src="media/16396494348330/16397318302222.jpg" alt="" /></p>
+<pre><code class="language-bash"># md5
+./hashcat -m 0  'BED128365216C019988915ED3ADD75FB' rockyou.txt
+# sha256
+hashcat -m 1400  '8D969EEF6ECAD3C29A3A629280E686CF0C3F5D5A86AFF3CA12020C923ADC6C92' rockyou.txt
+</code></pre>
+<h3><a id="%E5%8A%A0%E5%AF%86encryption" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>加密 Encryption</h3>
+<ul>
+<li>对称加密
+<ul>
+<li>AES, 3DES</li>
+</ul>
+</li>
+<li>非对称加密
+<ul>
+<li>RSA, DSA</li>
+</ul>
+</li>
+</ul>
+<p>在 HTTPS 中的应用 [1]:</p>
+<p><img src="media/16396494348330/16397361417782.jpg" alt="" /></p>
+<p>握手详解 [2]:</p>
+<p><img src="media/16396494348330/16397361746182.jpg" alt="" /></p>
+<h3><a id="%E7%AD%BE%E5%90%8Dsigning" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>签名 Signing</h3>
+<p>用来校验信息的合法性 (当信息的完整性 Integrity 很重要时)</p>
+<h4><a id="lesson-6%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 6 题目</h4>
+<p>根据 <code>openssl</code> 的 man 手册, 可以从从 RSA 私钥获取 modulus:</p>
+<pre><code class="language-bash">openssl rsa -in private.pem -modulus -noout
+</code></pre>
+<p>这样就获取了第一个问题的答案</p>
+<p>第二个问题看不懂, <em>a signature for us based on that modulus</em> 不知道是什么意思</p>
+<p>可能要先去学习一下 <em>RSA</em> 算法具体是怎么回事才能明白问题的含义</p>
+<p><a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">https://en.wikipedia.org/wiki/RSA_(cryptosystem)</a></p>
+<h4><a id="rsa%E7%AE%97%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>RSA 算法</h4>
+\[{\displaystyle (m^{e})^{d}\equiv m{\pmod {n}}}
+\]
+<p>三个很大的正整数 e, d, n 可以满足上面的式子</p>
+<p>通俗的说, <em>m 的 e 次方的 d 次方除以 n 之后的余数</em>, 与 <em>m 直接除以 n 的余数</em>, 相等</p>
+<p>找到这么一组数字之后 m 就可以作为 payload<br />
+n 即是上面提到的 <em>modulus</em><br />
+那么 e 和 n 在一起就可以作为公钥<br />
+d 和 n 在一起 可以作为私钥</p>
+<p>加密的过程是, 给定 m, e, n, 获得 c:</p>
+\[{\displaystyle c\equiv m^{e}{\pmod {n}}}
+\]
+<p>解密的过程是, 给定 c, d, n, 获得 m:</p>
+\[{\displaystyle c^{d}\equiv (m^{e})^{d}\equiv m{\pmod {n}}}
+\]
+<h4><a id="%E5%9B%9E%E5%88%B0lesson-6%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>回到 Lesson 6 题目</h4>
+<p>RSA 算法已经有了大概的了解, 但还是看不懂题目</p>
+<p>于是搜了下 &quot;openssl 签名&quot;, 没找到合适的内容, 不过大概知道了 <code>openssl</code> 这个工具可以来签名东西</p>
+<p>然后直接去搜题目的答案看了下, 原来题目的意思是想要把 modulus 的内容用私钥签个名</p>
+<p>这题目有点草人, 说明和提示都需要改进一下, 应该把每一步的输入和期望输出说清楚</p>
+<ul>
+<li>必须把 <code>Modulus=</code> 给去掉</li>
+<li>必须要把 modulus 内容中最后的换行符去掉 (<code>echo -n</code>)
+<ul>
+<li><a href="https://github.com/WebGoat/WebGoat/issues/687">https://github.com/WebGoat/WebGoat/issues/687</a></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-bash">echo -n &quot;xxxx modulus&quot; | openssl dgst -sha256 -sign private.pem | base64
+</code></pre>
+<h3><a id="keystores%E5%AF%86%E9%92%A5%E5%BA%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Keystores 密钥库</h3>
+<ul>
+<li>基于文件系统</li>
+<li>基于数据库</li>
+<li>基于硬件</li>
+</ul>
+<p>DNS CAA: <a href="https://en.wikipedia.org/wiki/DNS_Certification_Authority_Authorization">https://en.wikipedia.org/wiki/DNS_Certification_Authority_Authorization</a></p>
+<h3><a id="security-defaults" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Security defaults</h3>
+<p>很多安全问题都是因为使用了默认的安全设置</p>
+<ul>
+<li>java cacerts 从来没更改过</li>
+<li>个人 id_rsa 私钥未加密存储</li>
+<li>ssh 服务器允许 username/password 访问, 导致持续经受暴力破解</li>
+</ul>
+<blockquote>
+<p>但话说回来, 从开发设计的角度来说, 为啥要把不安全的配置作为默认配置呢? 这难道不是一种设计失误?<br />
+如果可以默认提供安全的配置, 那就应该把安全的配置作为默认配置<br />
+如果没办法提供安全的配置 (比如有些信息只有使用者才知道), 那应该引导使用者去使用安全的配置, 在配置前可以让应用跑不起来<br />
+说白了很多时候开发者并没那么重视安全, 或者说, 比起来安全, 更在意的是应用是否会被更多人使用</p>
+</blockquote>
+<h4><a id="lesson-8%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 8 题目</h4>
+<pre><code class="language-bash"># 先按照题目要求把 docker 跑起来
+docker run -d webgoat/assignments:findthesecret
+
+# 使用 root 账号进入 docker 
+docker exec -it -u root 3df20e2bdda8 bash
+</code></pre>
+<p>按照题目要求用 /root 目录下的 secret 解密信息</p>
+<pre><code class="language-plain_text">echo &quot;U2FsdGVkX199jgh5oANElFdtCxIEvdEvciLi+v+5loE+VCuy6Ii0b+5byb5DXp32RPmT02Ek1pf55ctQN+DHbwCPiVRfFQamDmbHBUpD7as=&quot; | openssl enc -aes-256-cbc -d -a -kfile /root/default_secret
+</code></pre>
+<blockquote>
+<p>题目的意思应该是想要表达不要在 docker image 里面放任何敏感信息吧?</p>
+</blockquote>
+<h2><a id="0xff%E5%BC%95%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0xFF 引用</h2>
+<p>[1] <a href="https://segmentfault.com/a/1190000021494676">https://segmentfault.com/a/1190000021494676</a><br />
+[2] <a href="https://segmentfault.com/a/1190000021559557?_ea=29659396">https://segmentfault.com/a/1190000021559557?_ea=29659396</a></p>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2019
+              Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+              Theme used <a target="_blank" href="https://bulma.io/">Bulma CSS</a>.
+          </p>
+        </div>
+      </footer>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+
+  
+    
+
+
+
+
+  </body>
+</html>

